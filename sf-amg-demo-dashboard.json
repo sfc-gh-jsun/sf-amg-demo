@@ -1,0 +1,692 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 4,
+  "iteration": 1660056974218,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "BFiJcmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 11,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "displayLabels": [
+          "percent",
+          "name"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^ARRIVALS$/",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "BFiJcmmVz"
+          },
+          "format": 0,
+          "rawSql": "SELECT count(distinct(id)) as arrivals, dest\nfrom flights_vw\nwhere $__timeFilter(ts_utc)\ngroup by dest",
+          "refId": "A"
+        }
+      ],
+      "title": "Arrivals by Airports in Pie Chart",
+      "transparent": true,
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "BFiJcmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 76,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 13,
+        "x": 11,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.96,
+        "colorByField": "ARRIVALS",
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "orientation": "vertical",
+        "showValue": "auto",
+        "stacking": "none",
+        "text": {},
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "BFiJcmmVz"
+          },
+          "format": 0,
+          "rawSql": "SELECT count(distinct(id)) as arrivals, dest\nfrom flights_vw\nwhere $__timeFilter(ts_utc)\ngroup by dest \norder by arrivals\ndesc",
+          "refId": "A"
+        }
+      ],
+      "title": "Number of Arrivals by Airports",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "BFiJcmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 10,
+        "x": 0,
+        "y": 12
+      },
+      "id": 2,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "ALT AAL76"
+          }
+        ]
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "BFiJcmmVz"
+          },
+          "format": 0,
+          "rawSql": "SELECT ts_utc as time, alt as altitude\nFROM flights_vw\nWHERE $__timeFilter(ts_utc)\n    AND id= '${flightID}'\n    AND dest = '${airport}'\n    order by time desc",
+          "refId": "A"
+        }
+      ],
+      "title": "Altitude for Flight ${flightID} at ${airport}",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "BFiJcmmVz"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 65,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          },
+          "mappings": [],
+          "max": 60000,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-purple",
+                "value": 500
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 14,
+        "x": 10,
+        "y": 12
+      },
+      "id": 15,
+      "options": {
+        "barRadius": 0.05,
+        "barWidth": 0.76,
+        "colorByField": "ALTITUDE",
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "orientation": "vertical",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "TIME",
+        "xTickLabelRotation": 90,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "BFiJcmmVz"
+          },
+          "format": 0,
+          "rawSql": "SELECT ts_utc as time, alt as altitude\nFROM flights_vw\nWHERE $__timeFilter(ts_utc)\n    AND id= '${flightID}'\n    AND dest = '${airport}'\n    order by time",
+          "refId": "A"
+        }
+      ],
+      "title": "Altitude chart for $flightID",
+      "transparent": true,
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "BFiJcmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 2000
+              },
+              {
+                "color": "dark-orange",
+                "value": 4000
+              },
+              {
+                "color": "dark-blue",
+                "value": 6000
+              },
+              {
+                "color": "blue",
+                "value": 10000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "id": 6,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": true,
+          "showDebug": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "field": "ALT",
+                  "fixed": "dark-green"
+                },
+                "opacity": 0.9,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "field": "ALT",
+                  "fixed": 5,
+                  "max": 15,
+                  "min": 4
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "location": {
+              "": {
+                "geohash": "GEOHASH"
+              },
+              "mode": "geohash"
+            },
+            "name": "Layer 1",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "view": {
+          "id": "coords",
+          "lat": 37.417,
+          "lon": -122.049,
+          "zoom": 9
+        }
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "BFiJcmmVz"
+          },
+          "format": 0,
+          "rawSql": "select alt, geohash, id, lat, lon\nfrom flights_vw\nwhere $__timeFilter(ts_utc)\n     AND dest = '${airport}'\n     AND id = '${flightID}'\n    group by geohash,alt,id,lat,lon",
+          "refId": "A"
+        }
+      ],
+      "title": "Flight Tracks of $flightID",
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "BFiJcmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 2000
+              },
+              {
+                "color": "dark-orange",
+                "value": 4000
+              },
+              {
+                "color": "dark-blue",
+                "value": 6000
+              },
+              {
+                "color": "blue",
+                "value": 10000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 12,
+        "x": 12,
+        "y": 22
+      },
+      "id": 5,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": true,
+          "showDebug": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "field": "ALT",
+                  "fixed": "dark-green"
+                },
+                "opacity": 0.5,
+                "rotation": {
+                  "fixed": 4,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "fixed": 4,
+                  "max": 15,
+                  "min": 2
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "location": {
+              "": {
+                "geohash": "GEOHASH"
+              },
+              "mode": "geohash"
+            },
+            "name": "Layer 1",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "view": {
+          "id": "coords",
+          "lat": 37.417,
+          "lon": -122.049,
+          "zoom": 9
+        }
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "BFiJcmmVz"
+          },
+          "format": 0,
+          "rawSql": "select alt, geohash, id, lat, lon\nfrom flights_vw\nwhere $__timeFilter(ts_utc)\n    and (dest = 'KSFO' or dest = 'KOAK' or dest = 'KSJC')\n    group by geohash,alt,id,lat,lon",
+          "refId": "A"
+        }
+      ],
+      "title": "Flight tracks for SFO,SJC,OAK",
+      "type": "geomap"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 35,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "KSFO",
+          "value": "KSFO"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Airport",
+        "multi": false,
+        "name": "airport",
+        "options": [
+          {
+            "selected": true,
+            "text": "KSFO",
+            "value": "KSFO"
+          },
+          {
+            "selected": false,
+            "text": "KSJC",
+            "value": "KSJC"
+          },
+          {
+            "selected": false,
+            "text": "KOAK",
+            "value": "KOAK"
+          }
+        ],
+        "query": "KSFO,KSJC,KOAK",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "DAL753",
+          "value": "DAL753"
+        },
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "BFiJcmmVz"
+        },
+        "definition": "Snowflake Query :  select distinct(id) from flights_vw where $__timeFilter(ts_utc) and dest = '${airport}'",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "flightID",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "select distinct(id) from flights_vw where $__timeFilter(ts_utc) and dest = '${airport}'"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "America/Los_Angeles",
+  "title": "Snowflake-AMG-Demo",
+  "uid": "dMZNv0zVj",
+  "version": 12,
+  "weekStart": ""
+}
